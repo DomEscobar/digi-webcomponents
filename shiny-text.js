@@ -10,12 +10,13 @@ let TextShiny = class TextShiny extends LitElement {
     constructor() {
         super(...arguments);
         this.text = '';
+        this.bgTitle = "";
     }
     render() {
         return html `
        <div class="neon">
             <span class="text">${this.text}</span>
-            <span class="gradient"></span>
+            <span class="gradient"  style="background:${this.bgTitle}"></span>
             <span class="spotlight"></span>
         </div>
      `;
@@ -32,7 +33,12 @@ TextShiny.styles = css `
         position: relative;
         overflow: hidden;
         filter: brightness(200%);
+        width: 100%;
+        /* border: 2px solid black; */
+        background: rgb(16 16 16);
+        box-shadow: rgb(97 97 97) -3px -1px 14px 7px;
     }
+    
 
     .text {
         background-color: black;
@@ -42,45 +48,29 @@ TextShiny.styles = css `
         text-transform: uppercase;
         position: relative;
         user-select: none;
+        width: 100%;
     }
 
     .text::before {
         content: attr(data-text);
         position: absolute;
-        color: white;
+        color: black;
         filter: blur(0.02em);
         mix-blend-mode: difference;
     }
 
     .gradient {
         position: absolute;
-        background: linear-gradient(45deg, red, gold, lightgreen, gold, red);
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0px;
         mix-blend-mode: multiply;
     }
 
     .spotlight {
         position: absolute;
-        top: -100%;
-        left: -100%;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(
-                circle,
-                white,
-                transparent 25%
-            ) center / 25% 25%,
-            radial-gradient(
-                circle,
-                white,
-                black 25%
-            ) center / 12.5% 12.5%;
-        animation: light 5s linear infinite;
-        mix-blend-mode: color-dodge;
+        inset: -62% 6px 9px -104%;
+        background: radial-gradient(circle, rgb(255, 255, 255), transparent 25%) center center / 25% 25%, radial-gradient(circle, black, black 25%) center center / 12.5% 12.5%;
+        animation: 5s linear 0s infinite normal none running light;
+        mix-blend-mode: overlay;
     }
 
     @keyframes light {
@@ -93,6 +83,9 @@ TextShiny.styles = css `
 __decorate([
     property()
 ], TextShiny.prototype, "text", void 0);
+__decorate([
+    property({ type: String })
+], TextShiny.prototype, "bgTitle", void 0);
 TextShiny = __decorate([
     customElement('text-shiny')
 ], TextShiny);
