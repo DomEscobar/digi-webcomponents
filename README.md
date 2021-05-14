@@ -1,5 +1,6 @@
 <h1> Digi-webcomponents </h1>
-<p> Webcomponents for the digidex and digibattle. Community fanmade for <a href="digible.io"> digible.io </a>
+<p> Webcomponents for digidex and digibattle. 
+    Community fanmade for <a href="digible.io"> digible.io </a>
 <br>
 <br>
 <a style="font-size:18px" href="https://digidex.vercel.app/"> Demo </a>
