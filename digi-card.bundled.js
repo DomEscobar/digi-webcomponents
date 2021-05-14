@@ -3,7 +3,7 @@
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var t,i,s,e;const n=globalThis.trustedTypes,o=n?n.createPolicy("lit-html",{createHTML:t=>t}):void 0,r=`lit$${(Math.random()+"").slice(9)}$`,l="?"+r,h=`<${l}>`,c=document,a=(t="")=>c.createComment(t),d=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,p=/-->/g,g=/>/g,f=/>|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g,x=/'/g,b=/"/g,m=/^(?:script|style|textarea)$/i,w=(t=>(i,...s)=>({_$litType$:t,strings:i,values:s}))(1),y=Symbol.for("lit-noChange"),S=Symbol.for("lit-nothing"),$=new WeakMap,k=c.createTreeWalker(c,129,null,!1);class C{constructor({strings:t,_$litType$:i},s){let e;this.parts=[];let c=0,d=0;const u=t.length-1,w=this.parts,[y,S]=((t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let o,a,d=-1,u=0;for(;u<s.length&&(c.lastIndex=u,a=c.exec(s),null!==a);)u=c.lastIndex,c===v?"!--"===a[1]?c=p:void 0!==a[1]?c=g:void 0!==a[2]?(m.test(a[2])&&(n=RegExp("</"+a[2],"g")),c=f):void 0!==a[3]&&(c=f):c===f?">"===a[0]?(c=null!=n?n:v,d=-1):void 0===a[1]?d=-2:(d=c.lastIndex-a[2].length,o=a[1],c=void 0===a[3]?f:'"'===a[3]?b:x):c===b||c===x?c=f:c===p||c===g?c=v:(c=f,n=void 0);const w=c===f&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+h:d>=0?(e.push(o),s.slice(0,d)+"$lit$"+s.slice(d)+r+w):s+r+(-2===d?(e.push(void 0),i):w)}const a=l+(t[s]||"<?>")+(2===i?"</svg>":"");return[void 0!==o?o.createHTML(a):a,e]})(t,i);if(this.el=C.createElement(y,s),k.currentNode=this.el.content,2===i){const t=this.el.content,i=t.firstChild;i.remove(),t.append(...i.childNodes)}for(;null!==(e=k.nextNode())&&w.length<u;){if(1===e.nodeType){if(e.hasAttributes()){const t=[];for(const i of e.getAttributeNames())if(i.endsWith("$lit$")||i.startsWith(r)){const s=S[d++];if(t.push(i),void 0!==s){const t=e.getAttribute(s.toLowerCase()+"$lit$").split(r),i=/([.?@])?(.*)/.exec(s);w.push({type:1,index:c,name:i[2],strings:t,ctor:"."===i[1]?O:"?"===i[1]?j:"@"===i[1]?M:E})}else w.push({type:6,index:c})}for(const i of t)e.removeAttribute(i)}if(m.test(e.tagName)){const t=e.textContent.split(r),i=t.length-1;if(i>0){e.textContent=n?n.emptyScript:"";for(let s=0;s<i;s++)e.append(t[s],a()),k.nextNode(),w.push({type:2,index:++c});e.append(t[i],a())}}}else if(8===e.nodeType)if(e.data===l)w.push({type:2,index:c});else{let t=-1;for(;-1!==(t=e.data.indexOf(r,t+1));)w.push({type:7,index:c}),t+=r.length-1}c++}}static createElement(t,i){const s=c.createElement("template");return s.innerHTML=t,s}}function T(t,i,s=t,e){var n,o,r,l;if(i===y)return i;let h=void 0!==e?null===(n=s.Σi)||void 0===n?void 0:n[e]:s.Σo;const c=d(i)?void 0:i._$litDirective$;return(null==h?void 0:h.constructor)!==c&&(null===(o=null==h?void 0:h.O)||void 0===o||o.call(h,!1),void 0===c?h=void 0:(h=new c(t),h.T(t,s,e)),void 0!==e?(null!==(r=(l=s).Σi)&&void 0!==r?r:l.Σi=[])[e]=h:s.Σo=h),void 0!==h&&(i=T(t,h.S(t,i.values),h,e)),i}class V{constructor(t,i){this.l=[],this.N=void 0,this.D=t,this.M=i}u(t){var i;const{el:{content:s},parts:e}=this.D,n=(null!==(i=null==t?void 0:t.creationScope)&&void 0!==i?i:c).importNode(s,!0);k.currentNode=n;let o=k.nextNode(),r=0,l=0,h=e[0];for(;void 0!==h;){if(r===h.index){let i;2===h.type?i=new A(o,o.nextSibling,this,t):1===h.type?i=new h.ctor(o,h.name,h.strings,this,t):6===h.type&&(i=new z(o,this,t)),this.l.push(i),h=e[++l]}r!==(null==h?void 0:h.index)&&(o=k.nextNode(),r++)}return n}v(t){let i=0;for(const s of this.l)void 0!==s&&(void 0!==s.strings?(s.I(t,s,i),i+=s.strings.length-2):s.I(t[i])),i++}}class A{constructor(t,i,s,e){this.type=2,this.N=void 0,this.A=t,this.B=i,this.M=s,this.options=e}setConnected(t){var i;null===(i=this.P)||void 0===i||i.call(this,t)}get parentNode(){return this.A.parentNode}get startNode(){return this.A}get endNode(){return this.B}I(t,i=this){t=T(this,t,i),d(t)?t===S||null==t||""===t?(this.H!==S&&this.R(),this.H=S):t!==this.H&&t!==y&&this.m(t):void 0!==t._$litType$?this._(t):void 0!==t.nodeType?this.$(t):(t=>{var i;return u(t)||"function"==typeof(null===(i=t)||void 0===i?void 0:i[Symbol.iterator])})(t)?this.g(t):this.m(t)}k(t,i=this.B){return this.A.parentNode.insertBefore(t,i)}$(t){this.H!==t&&(this.R(),this.H=this.k(t))}m(t){const i=this.A.nextSibling;null!==i&&3===i.nodeType&&(null===this.B?null===i.nextSibling:i===this.B.previousSibling)?i.data=t:this.$(c.createTextNode(t)),this.H=t}_(t){var i;const{values:s,_$litType$:e}=t,n="number"==typeof e?this.C(t):(void 0===e.el&&(e.el=C.createElement(e.h,this.options)),e);if((null===(i=this.H)||void 0===i?void 0:i.D)===n)this.H.v(s);else{const t=new V(n,this),i=t.u(this.options);t.v(s),this.$(i),this.H=t}}C(t){let i=$.get(t.strings);return void 0===i&&$.set(t.strings,i=new C(t)),i}g(t){u(this.H)||(this.H=[],this.R());const i=this.H;let s,e=0;for(const n of t)e===i.length?i.push(s=new A(this.k(a()),this.k(a()),this,this.options)):s=i[e],s.I(n),e++;e<i.length&&(this.R(s&&s.B.nextSibling,e),i.length=e)}R(t=this.A.nextSibling,i){var s;for(null===(s=this.P)||void 0===s||s.call(this,!1,!0,i);t&&t!==this.B;){const i=t.nextSibling;t.remove(),t=i}}}class E{constructor(t,i,s,e,n){this.type=1,this.H=S,this.N=void 0,this.V=void 0,this.element=t,this.name=i,this.M=e,this.options=n,s.length>2||""!==s[0]||""!==s[1]?(this.H=Array(s.length-1).fill(S),this.strings=s):this.H=S}get tagName(){return this.element.tagName}I(t,i=this,s,e){const n=this.strings;let o=!1;if(void 0===n)t=T(this,t,i,0),o=!d(t)||t!==this.H&&t!==y,o&&(this.H=t);else{const e=t;let r,l;for(t=n[0],r=0;r<n.length-1;r++)l=T(this,e[s+r],i,r),l===y&&(l=this.H[r]),o||(o=!d(l)||l!==this.H[r]),l===S?t=S:t!==S&&(t+=(null!=l?l:"")+n[r+1]),this.H[r]=l}o&&!e&&this.W(t)}W(t){t===S?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"")}}class O extends E{constructor(){super(...arguments),this.type=3}W(t){this.element[this.name]=t===S?void 0:t}}class j extends E{constructor(){super(...arguments),this.type=4}W(t){t&&t!==S?this.element.setAttribute(this.name,""):this.element.removeAttribute(this.name)}}class M extends E{constructor(){super(...arguments),this.type=5}I(t,i=this){var s;if((t=null!==(s=T(this,t,i,0))&&void 0!==s?s:S)===y)return;const e=this.H,n=t===S&&e!==S||t.capture!==e.capture||t.once!==e.once||t.passive!==e.passive,o=t!==S&&(e===S||n);n&&this.element.removeEventListener(this.name,this,e),o&&this.element.addEventListener(this.name,this,t),this.H=t}handleEvent(t){var i,s;"function"==typeof this.H?this.H.call(null!==(s=null===(i=this.options)||void 0===i?void 0:i.host)&&void 0!==s?s:this.element,t):this.H.handleEvent(t)}}class z{constructor(t,i,s){this.element=t,this.type=6,this.N=void 0,this.V=void 0,this.M=i,this.options=s}I(t){T(this,t)}}null===(i=(t=globalThis).litHtmlPlatformSupport)||void 0===i||i.call(t,C,A),(null!==(s=(e=globalThis).litHtmlVersions)&&void 0!==s?s:e.litHtmlVersions=[]).push("2.0.0-rc.2");
+var t,i,s,e;const n=globalThis.trustedTypes,o=n?n.createPolicy("lit-html",{createHTML:t=>t}):void 0,r=`lit$${(Math.random()+"").slice(9)}$`,l="?"+r,h=`<${l}>`,c=document,a=(t="")=>c.createComment(t),d=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,p=/-->/g,g=/>/g,x=/>|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g,f=/'/g,b=/"/g,w=/^(?:script|style|textarea)$/i,m=(t=>(i,...s)=>({_$litType$:t,strings:i,values:s}))(1),y=Symbol.for("lit-noChange"),S=Symbol.for("lit-nothing"),$=new WeakMap,k=c.createTreeWalker(c,129,null,!1);class C{constructor({strings:t,_$litType$:i},s){let e;this.parts=[];let c=0,d=0;const u=t.length-1,m=this.parts,[y,S]=((t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let o,a,d=-1,u=0;for(;u<s.length&&(c.lastIndex=u,a=c.exec(s),null!==a);)u=c.lastIndex,c===v?"!--"===a[1]?c=p:void 0!==a[1]?c=g:void 0!==a[2]?(w.test(a[2])&&(n=RegExp("</"+a[2],"g")),c=x):void 0!==a[3]&&(c=x):c===x?">"===a[0]?(c=null!=n?n:v,d=-1):void 0===a[1]?d=-2:(d=c.lastIndex-a[2].length,o=a[1],c=void 0===a[3]?x:'"'===a[3]?b:f):c===b||c===f?c=x:c===p||c===g?c=v:(c=x,n=void 0);const m=c===x&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+h:d>=0?(e.push(o),s.slice(0,d)+"$lit$"+s.slice(d)+r+m):s+r+(-2===d?(e.push(void 0),i):m)}const a=l+(t[s]||"<?>")+(2===i?"</svg>":"");return[void 0!==o?o.createHTML(a):a,e]})(t,i);if(this.el=C.createElement(y,s),k.currentNode=this.el.content,2===i){const t=this.el.content,i=t.firstChild;i.remove(),t.append(...i.childNodes)}for(;null!==(e=k.nextNode())&&m.length<u;){if(1===e.nodeType){if(e.hasAttributes()){const t=[];for(const i of e.getAttributeNames())if(i.endsWith("$lit$")||i.startsWith(r)){const s=S[d++];if(t.push(i),void 0!==s){const t=e.getAttribute(s.toLowerCase()+"$lit$").split(r),i=/([.?@])?(.*)/.exec(s);m.push({type:1,index:c,name:i[2],strings:t,ctor:"."===i[1]?O:"?"===i[1]?j:"@"===i[1]?M:E})}else m.push({type:6,index:c})}for(const i of t)e.removeAttribute(i)}if(w.test(e.tagName)){const t=e.textContent.split(r),i=t.length-1;if(i>0){e.textContent=n?n.emptyScript:"";for(let s=0;s<i;s++)e.append(t[s],a()),k.nextNode(),m.push({type:2,index:++c});e.append(t[i],a())}}}else if(8===e.nodeType)if(e.data===l)m.push({type:2,index:c});else{let t=-1;for(;-1!==(t=e.data.indexOf(r,t+1));)m.push({type:7,index:c}),t+=r.length-1}c++}}static createElement(t,i){const s=c.createElement("template");return s.innerHTML=t,s}}function T(t,i,s=t,e){var n,o,r,l;if(i===y)return i;let h=void 0!==e?null===(n=s.Σi)||void 0===n?void 0:n[e]:s.Σo;const c=d(i)?void 0:i._$litDirective$;return(null==h?void 0:h.constructor)!==c&&(null===(o=null==h?void 0:h.O)||void 0===o||o.call(h,!1),void 0===c?h=void 0:(h=new c(t),h.T(t,s,e)),void 0!==e?(null!==(r=(l=s).Σi)&&void 0!==r?r:l.Σi=[])[e]=h:s.Σo=h),void 0!==h&&(i=T(t,h.S(t,i.values),h,e)),i}class V{constructor(t,i){this.l=[],this.N=void 0,this.D=t,this.M=i}u(t){var i;const{el:{content:s},parts:e}=this.D,n=(null!==(i=null==t?void 0:t.creationScope)&&void 0!==i?i:c).importNode(s,!0);k.currentNode=n;let o=k.nextNode(),r=0,l=0,h=e[0];for(;void 0!==h;){if(r===h.index){let i;2===h.type?i=new A(o,o.nextSibling,this,t):1===h.type?i=new h.ctor(o,h.name,h.strings,this,t):6===h.type&&(i=new z(o,this,t)),this.l.push(i),h=e[++l]}r!==(null==h?void 0:h.index)&&(o=k.nextNode(),r++)}return n}v(t){let i=0;for(const s of this.l)void 0!==s&&(void 0!==s.strings?(s.I(t,s,i),i+=s.strings.length-2):s.I(t[i])),i++}}class A{constructor(t,i,s,e){this.type=2,this.N=void 0,this.A=t,this.B=i,this.M=s,this.options=e}setConnected(t){var i;null===(i=this.P)||void 0===i||i.call(this,t)}get parentNode(){return this.A.parentNode}get startNode(){return this.A}get endNode(){return this.B}I(t,i=this){t=T(this,t,i),d(t)?t===S||null==t||""===t?(this.H!==S&&this.R(),this.H=S):t!==this.H&&t!==y&&this.m(t):void 0!==t._$litType$?this._(t):void 0!==t.nodeType?this.$(t):(t=>{var i;return u(t)||"function"==typeof(null===(i=t)||void 0===i?void 0:i[Symbol.iterator])})(t)?this.g(t):this.m(t)}k(t,i=this.B){return this.A.parentNode.insertBefore(t,i)}$(t){this.H!==t&&(this.R(),this.H=this.k(t))}m(t){const i=this.A.nextSibling;null!==i&&3===i.nodeType&&(null===this.B?null===i.nextSibling:i===this.B.previousSibling)?i.data=t:this.$(c.createTextNode(t)),this.H=t}_(t){var i;const{values:s,_$litType$:e}=t,n="number"==typeof e?this.C(t):(void 0===e.el&&(e.el=C.createElement(e.h,this.options)),e);if((null===(i=this.H)||void 0===i?void 0:i.D)===n)this.H.v(s);else{const t=new V(n,this),i=t.u(this.options);t.v(s),this.$(i),this.H=t}}C(t){let i=$.get(t.strings);return void 0===i&&$.set(t.strings,i=new C(t)),i}g(t){u(this.H)||(this.H=[],this.R());const i=this.H;let s,e=0;for(const n of t)e===i.length?i.push(s=new A(this.k(a()),this.k(a()),this,this.options)):s=i[e],s.I(n),e++;e<i.length&&(this.R(s&&s.B.nextSibling,e),i.length=e)}R(t=this.A.nextSibling,i){var s;for(null===(s=this.P)||void 0===s||s.call(this,!1,!0,i);t&&t!==this.B;){const i=t.nextSibling;t.remove(),t=i}}}class E{constructor(t,i,s,e,n){this.type=1,this.H=S,this.N=void 0,this.V=void 0,this.element=t,this.name=i,this.M=e,this.options=n,s.length>2||""!==s[0]||""!==s[1]?(this.H=Array(s.length-1).fill(S),this.strings=s):this.H=S}get tagName(){return this.element.tagName}I(t,i=this,s,e){const n=this.strings;let o=!1;if(void 0===n)t=T(this,t,i,0),o=!d(t)||t!==this.H&&t!==y,o&&(this.H=t);else{const e=t;let r,l;for(t=n[0],r=0;r<n.length-1;r++)l=T(this,e[s+r],i,r),l===y&&(l=this.H[r]),o||(o=!d(l)||l!==this.H[r]),l===S?t=S:t!==S&&(t+=(null!=l?l:"")+n[r+1]),this.H[r]=l}o&&!e&&this.W(t)}W(t){t===S?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"")}}class O extends E{constructor(){super(...arguments),this.type=3}W(t){this.element[this.name]=t===S?void 0:t}}class j extends E{constructor(){super(...arguments),this.type=4}W(t){t&&t!==S?this.element.setAttribute(this.name,""):this.element.removeAttribute(this.name)}}class M extends E{constructor(){super(...arguments),this.type=5}I(t,i=this){var s;if((t=null!==(s=T(this,t,i,0))&&void 0!==s?s:S)===y)return;const e=this.H,n=t===S&&e!==S||t.capture!==e.capture||t.once!==e.once||t.passive!==e.passive,o=t!==S&&(e===S||n);n&&this.element.removeEventListener(this.name,this,e),o&&this.element.addEventListener(this.name,this,t),this.H=t}handleEvent(t){var i,s;"function"==typeof this.H?this.H.call(null!==(s=null===(i=this.options)||void 0===i?void 0:i.host)&&void 0!==s?s:this.element,t):this.H.handleEvent(t)}}class z{constructor(t,i,s){this.element=t,this.type=6,this.N=void 0,this.V=void 0,this.M=i,this.options=s}I(t){T(this,t)}}null===(i=(t=globalThis).litHtmlPlatformSupport)||void 0===i||i.call(t,C,A),(null!==(s=(e=globalThis).litHtmlVersions)&&void 0!==s?s:e.litHtmlVersions=[]).push("2.0.0-rc.2");
 /**
  * @license
  * Copyright 2019 Google LLC
@@ -42,7 +42,7 @@ const it=t=>i=>"function"==typeof i?((t,i)=>(window.customElements.define(t,i),i
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-class ot extends class{constructor(t){}T(t,i,s){this.Σdt=t,this.M=i,this.Σct=s}S(t,i){return this.update(t,i)}update(t,i){return this.render(...i)}}{constructor(t){if(super(t),this.vt=S,t.type!==nt)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(t){if(t===S)return this.Vt=void 0,this.vt=t;if(t===y)return t;if("string"!=typeof t)throw Error(this.constructor.directiveName+"() called with a non-string value");if(t===this.vt)return this.Vt;this.vt=t;const i=[t];return i.raw=i,this.Vt={_$litType$:this.constructor.resultType,strings:i,values:[]}}}ot.directiveName="unsafeHTML",ot.resultType=1;const rt=(t=>(...i)=>({_$litDirective$:t,values:i}))(ot);var lt=function(t,i,s,e){for(var n,o=arguments.length,r=o<3?i:null===e?e=Object.getOwnPropertyDescriptor(i,s):e,l=t.length-1;l>=0;l--)(n=t[l])&&(r=(o<3?n(r):o>3?n(i,s,r):n(i,s))||r);return o>3&&r&&Object.defineProperty(i,s,r),r};let ht=class extends tt{constructor(){super(...arguments),this.text="",this.bgTitle=""}render(){return w`
+class ot extends class{constructor(t){}T(t,i,s){this.Σdt=t,this.M=i,this.Σct=s}S(t,i){return this.update(t,i)}update(t,i){return this.render(...i)}}{constructor(t){if(super(t),this.vt=S,t.type!==nt)throw Error(this.constructor.directiveName+"() can only be used in child bindings")}render(t){if(t===S)return this.Vt=void 0,this.vt=t;if(t===y)return t;if("string"!=typeof t)throw Error(this.constructor.directiveName+"() called with a non-string value");if(t===this.vt)return this.Vt;this.vt=t;const i=[t];return i.raw=i,this.Vt={_$litType$:this.constructor.resultType,strings:i,values:[]}}}ot.directiveName="unsafeHTML",ot.resultType=1;const rt=(t=>(...i)=>({_$litDirective$:t,values:i}))(ot);var lt=function(t,i,s,e){for(var n,o=arguments.length,r=o<3?i:null===e?e=Object.getOwnPropertyDescriptor(i,s):e,l=t.length-1;l>=0;l--)(n=t[l])&&(r=(o<3?n(r):o>3?n(i,s,r):n(i,s))||r);return o>3&&r&&Object.defineProperty(i,s,r),r};let ht=class extends tt{constructor(){super(...arguments),this.text="",this.bgTitle=""}render(){return m`
        <div class="neon">
             <span class="text">${this.text}</span>
             <span class="gradient"  style="background:${this.bgTitle}"></span>
@@ -105,25 +105,22 @@ class ot extends class{constructor(t){}T(t,i,s){this.Σdt=t,this.M=i,this.Σct=s
         }
     }
 
-   `,lt([et()],ht.prototype,"text",void 0),lt([et({type:String})],ht.prototype,"bgTitle",void 0),ht=lt([it("text-shiny")],ht);var ct=function(t,i,s,e){for(var n,o=arguments.length,r=o<3?i:null===e?e=Object.getOwnPropertyDescriptor(i,s):e,l=t.length-1;l>=0;l--)(n=t[l])&&(r=(o<3?n(r):o>3?n(i,s,r):n(i,s))||r);return o>3&&r&&Object.defineProperty(i,s,r),r};let at=class extends tt{render(){return w`
-        ${this.name?w`<div class="card-name"> <text-shiny bgTitle="${this.bgTitle}" text="${this.name}"></text-shiny></div>`:void 0}  
+   `,lt([et()],ht.prototype,"text",void 0),lt([et({type:String})],ht.prototype,"bgTitle",void 0),ht=lt([it("text-shiny")],ht);var ct=function(t,i,s,e){for(var n,o=arguments.length,r=o<3?i:null===e?e=Object.getOwnPropertyDescriptor(i,s):e,l=t.length-1;l>=0;l--)(n=t[l])&&(r=(o<3?n(r):o>3?n(i,s,r):n(i,s))||r);return o>3&&r&&Object.defineProperty(i,s,r),r};let at=class extends tt{render(){return m`
+        ${this.name?m`<div class="card-name"> <text-shiny bgTitle="${this.bgTitle}" text="${this.name}"></text-shiny></div>`:void 0}  
       <div class="card-body">
 
-      ${this.image?w`<img src="${this.image}" class="card-bg">`:void 0}
+      ${this.image?m`<img src="${this.image}" class="card-bg">`:void 0}
 
       <div class="image-container">
-      ${this.image?w`<img src="${this.image}" class="card-img-top">`:void 0}
+      ${this.image?m`<img src="${this.image}" class="card-img-top">`:void 0}
       </div>
 
       <div class="info-container">
 
-        ${this.price?w`<div class="text-row"> ${rt(dt.dollar)} <span class="info-text">${this.price}</span></div>`:void 0}  
+        ${this.power?m`<div class="text-power">  ${this.power} </div>`:void 0}  
 
-        ${this.releaseDate?w`<div class="text-row"> ${rt(dt.calendar)} <span class="info-text">${this.releaseDate}</span></div>`:void 0}  
+        ${this.price?m`<div class="text-row"> ${rt(dt.dollar)} <span class="info-text">${this.price}</span></div>`:void 0}  
 
-        ${this.condition?w`<div class="text-row"> ${rt(dt.diamond)} <span class="info-text">${this.condition}</span></div>`:void 0}  
-
-        ${this.power?w`<div class="text-power">  ${this.power} </div>`:void 0}  
 
         </div>
       </div>
@@ -142,43 +139,44 @@ class ot extends class{constructor(t){}T(t,i,s){this.Σdt=t,this.M=i,this.Σct=s
       left: 0px;
       height: 100%;
       top: 0px;
-      width: 60%;
       border-radius: 1rem;
       transform: rotate(15deg);
       z-index: -1;
     }
 
     .card-body{
-      padding: .5rem;
-      display: flex;
+      padding: 0.5rem;
+      text-align: center;
     }
 
     .image-container{
-      padding: .5rem;
-      flex:1;
+      padding: 0.5rem;
+      text-align: center;
+      display: inline-block;
     }
 
     .info-container{
-      padding: .5rem;
-      flex:1;
-      display:flex;
-      flex-direction:column;
+      padding: 0.5rem;
+      flex-direction: column;
+      display: inline-block;
+      margin: auto;
+      text-align: center;
+      vertical-align: text-bottom;
     }
 
     .card-img-top{
-      width: 100%;
-      height: auto;
-      border-radius: 1rem;
+      height: 136px;
+      max-width: 90px;
+      width: auto;
+      margin: auto;
+      text-align: center;
     }
 
     .card-name{
       text-align: center;
       border-bottom: 1px solid white;
       color: rgb(25 25 25);
-      font-size: calc(1.46rem + 0.12vw) !important;
-      text-shadow: 2px 2px 8px #ababab;import { replace } from '@rollup/plugin-replace';
-import { resolve } from '@rollup/plugin-node-resolve';
-
+      text-shadow: 2px 2px 8px #ababab;
     }
 
     .text-row{
@@ -187,16 +185,14 @@ import { resolve } from '@rollup/plugin-node-resolve';
       border-bottom: 1px solid #e2e2e2;
       display: flex;
       align-items: center;
-      margin-bottom: 1rem;
       flex:1;
     }
 
     .text-row svg{
       padding: 0.6rem;
-      margin-right: 1rem;
-      width: 32px;
+      width: 16px;
       border-radius: 0.5rem;
-      height: 32px;
+      height: 16px;
       vertical-align: top;
       opacity:0.5;
     }
@@ -205,12 +201,12 @@ import { resolve } from '@rollup/plugin-node-resolve';
       text-align: center;
       padding: 1rem;
       margin-top: -1rem;
-      line-height: 32px;
-      position:relative;
+      line-height: 16px;
+      position: relative;
       color: white;
-      font-size: 32px;
+      font-size: 27px;
       font-weight: bold;
-      text-shadow: rgb(255 255 255) 0px 1px 0px, rgb(201 201 201) 0px 2px 0px, rgb(187 187 187) 0px 3px 0px, rgb(185 185 185) 0px 4px 0px, rgb(183 183 183) 0px 5px 0px, rgb(0 0 0 / 10%) 0px 6px 1px, rgb(0 0 0 / 10%) 0px 0px 5px, rgb(0 0 0 / 30%) 0px 1px 3px, rgb(0 0 0 / 20%) 0px 3px 5px, rgb(0 0 0 / 25%) 0px 5px 10px, rgb(0 0 0 / 0%) 0px 10px 10px, rgb(0 0 0 / 0%) 0px 20px 20px;
+      text-shadow: rgb(255 255 255) 0px 1px 0px, rgb(201 201 201) 0px 2px 0px, rgb(187 187 187) 0px 3px 0px, rgb(185 185 185) 0px 4px 0px, rgb(183 183 183) 0px 5px 0px, rgb(0 0 0 / 10%) 0px 6px 1px, rgb(0 0 0 / 10%) 0px 0px 5px, rgb(0 0 0 / 30%) 0px 1px 3px, rgb(0 0 0 / 20%) 0px 3px 5px, rgb(0 0 0 / 25%) 0px 5px 10px, rgb(0 0 0 / 0%) 0px 10px 10px, rgb(0 0 0 / 0%) 0px 20px 20px;    
     }
 
     .text-power::after{

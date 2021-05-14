@@ -18,8 +18,6 @@ Example
 ```
     <digi-card 
         name="Bisasam" 
-        releaseDate="1999" 
-        condition="Near mint" price="32323" 
         power="1000"
         bgTitle="linear-gradient(1deg, #1e7e34, #1e7e34, rgb(255 250 250), #28a745, #28a745)"
         image="https://ipfs.arkerlabs.com/ipfs/QmVHTEKPLpvpBVyQ1SzQXUcC61xgEWPJokFqCqC1fsZDKo">

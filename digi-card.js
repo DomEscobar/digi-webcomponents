@@ -27,17 +27,12 @@ let DigiCard = class DigiCard extends LitElement {
 
       <div class="info-container">
 
+        ${this.power ?
+            html `<div class="text-power">  ${this.power} </div>` : undefined}  
+
         ${this.price ?
             html `<div class="text-row"> ${unsafeHTML(icons.dollar)} <span class="info-text">${this.price}</span></div>` : undefined}  
 
-        ${this.releaseDate ?
-            html `<div class="text-row"> ${unsafeHTML(icons.calendar)} <span class="info-text">${this.releaseDate}</span></div>` : undefined}  
-
-        ${this.condition ?
-            html `<div class="text-row"> ${unsafeHTML(icons.diamond)} <span class="info-text">${this.condition}</span></div>` : undefined}  
-
-        ${this.power ?
-            html `<div class="text-power">  ${this.power} </div>` : undefined}  
 
         </div>
       </div>
@@ -59,43 +54,44 @@ DigiCard.styles = css `
       left: 0px;
       height: 100%;
       top: 0px;
-      width: 60%;
       border-radius: 1rem;
       transform: rotate(15deg);
       z-index: -1;
     }
 
     .card-body{
-      padding: .5rem;
-      display: flex;
+      padding: 0.5rem;
+      text-align: center;
     }
 
     .image-container{
-      padding: .5rem;
-      flex:1;
+      padding: 0.5rem;
+      text-align: center;
+      display: inline-block;
     }
 
     .info-container{
-      padding: .5rem;
-      flex:1;
-      display:flex;
-      flex-direction:column;
+      padding: 0.5rem;
+      flex-direction: column;
+      display: inline-block;
+      margin: auto;
+      text-align: center;
+      vertical-align: text-bottom;
     }
 
     .card-img-top{
-      width: 100%;
-      height: auto;
-      border-radius: 1rem;
+      height: 136px;
+      max-width: 90px;
+      width: auto;
+      margin: auto;
+      text-align: center;
     }
 
     .card-name{
       text-align: center;
       border-bottom: 1px solid white;
       color: rgb(25 25 25);
-      font-size: calc(1.46rem + 0.12vw) !important;
-      text-shadow: 2px 2px 8px #ababab;import { replace } from '@rollup/plugin-replace';
-import { resolve } from '@rollup/plugin-node-resolve';
-
+      text-shadow: 2px 2px 8px #ababab;
     }
 
     .text-row{
@@ -104,16 +100,14 @@ import { resolve } from '@rollup/plugin-node-resolve';
       border-bottom: 1px solid #e2e2e2;
       display: flex;
       align-items: center;
-      margin-bottom: 1rem;
       flex:1;
     }
 
     .text-row svg{
       padding: 0.6rem;
-      margin-right: 1rem;
-      width: 32px;
+      width: 16px;
       border-radius: 0.5rem;
-      height: 32px;
+      height: 16px;
       vertical-align: top;
       opacity:0.5;
     }
@@ -122,12 +116,12 @@ import { resolve } from '@rollup/plugin-node-resolve';
       text-align: center;
       padding: 1rem;
       margin-top: -1rem;
-      line-height: 32px;
-      position:relative;
+      line-height: 16px;
+      position: relative;
       color: white;
-      font-size: 32px;
+      font-size: 27px;
       font-weight: bold;
-      text-shadow: rgb(255 255 255) 0px 1px 0px, rgb(201 201 201) 0px 2px 0px, rgb(187 187 187) 0px 3px 0px, rgb(185 185 185) 0px 4px 0px, rgb(183 183 183) 0px 5px 0px, rgb(0 0 0 / 10%) 0px 6px 1px, rgb(0 0 0 / 10%) 0px 0px 5px, rgb(0 0 0 / 30%) 0px 1px 3px, rgb(0 0 0 / 20%) 0px 3px 5px, rgb(0 0 0 / 25%) 0px 5px 10px, rgb(0 0 0 / 0%) 0px 10px 10px, rgb(0 0 0 / 0%) 0px 20px 20px;
+      text-shadow: rgb(255 255 255) 0px 1px 0px, rgb(201 201 201) 0px 2px 0px, rgb(187 187 187) 0px 3px 0px, rgb(185 185 185) 0px 4px 0px, rgb(183 183 183) 0px 5px 0px, rgb(0 0 0 / 10%) 0px 6px 1px, rgb(0 0 0 / 10%) 0px 0px 5px, rgb(0 0 0 / 30%) 0px 1px 3px, rgb(0 0 0 / 20%) 0px 3px 5px, rgb(0 0 0 / 25%) 0px 5px 10px, rgb(0 0 0 / 0%) 0px 10px 10px, rgb(0 0 0 / 0%) 0px 20px 20px;    
     }
 
     .text-power::after{
