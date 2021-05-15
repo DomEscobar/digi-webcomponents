@@ -34,8 +34,8 @@ TextShiny.styles = css `
         overflow: hidden;
         filter: brightness(200%);
         width: 100%;
-        /* border: 2px solid black; */
-        background: rgb(16 16 16);
+        padding: 5px;
+        background: rgb(16, 16, 16);
         box-shadow: rgb(97 97 97) -3px -1px 14px 7px;
     }
     
@@ -49,6 +49,8 @@ TextShiny.styles = css `
         position: relative;
         user-select: none;
         width: 100%;
+        font-size: 13px;
+        display: block;
     }
 
     .text::before {
@@ -67,10 +69,10 @@ TextShiny.styles = css `
 
     .spotlight {
         position: absolute;
-        inset: -62% 6px 9px -104%;
-        background: radial-gradient(circle, rgb(255, 255, 255), transparent 25%) center center / 25% 25%, radial-gradient(circle, black, black 25%) center center / 12.5% 12.5%;
+        inset: -80% 58px 7px -75%;
+        background: radial-gradient(circle, rgb(255 255 255), #4e4e4e 25%) center center / 25% 25%, radial-gradient(circle, white, black 25%) center center / 12.5% 12.5%;
         animation: 5s linear 0s infinite normal none running light;
-        mix-blend-mode: overlay;
+        mix-blend-mode: soft-light;
     }
 
     @keyframes light {

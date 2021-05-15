@@ -9,20 +9,37 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import './shiny-text.js';
 let DigiCard = class DigiCard extends LitElement {
-    // @property({ type: Array })
-    // attacks: string[] = [];
+    constructor() {
+        super(...arguments);
+        this.emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAmCAIAAADMaMX6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAzSURBVFhH7c1BEQAwEAOh+lcZKTXB3GsxwNutPqvP6rP6rD6rz+qz+qw+q8/qs/qs22/7cqJrk6NNXs8AAAAASUVORK5CYII=';
+        // @property({ type: Array })
+        // attacks: string[] = [];
+        this.loadedImg = this.emptyImg;
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        this.checkImage(this.image || this.emptyImg).then(() => {
+            this.loadedImg = this.image || this.emptyImg;
+            this.requestUpdate();
+        });
+    }
+    async checkImage(url) {
+        const img = new Image();
+        return new Promise(resolve => {
+            img.onload = () => resolve(img);
+            img.src = url;
+        });
+    }
     render() {
         return html `
         ${this.name ?
             html `<div class="card-name"> <text-shiny bgTitle="${this.bgTitle}" text="${this.name}"></text-shiny></div>` : undefined}  
       <div class="card-body">
 
-      ${this.image ?
-            html `<img src="${this.image}" class="card-bg">` : undefined}
+       <img src="${this.loadedImg}" class="card-bg" />
 
       <div class="image-container">
-      ${this.image ?
-            html `<img src="${this.image}" class="card-img-top">` : undefined}
+        <img src="${this.loadedImg}" class="card-img-top">
       </div>
 
       <div class="info-container">
