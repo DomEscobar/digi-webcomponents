@@ -12,9 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.0/web3.min.js"
-    integrity="sha512-71z8zf6qn/P6gLkDJ0yZT31m0QKMYEeTgFjYPtVZoLwuEv7WwPgfMG3qgkuha5GDm5lzrIiVttBIiDlzhbSyqQ=="
-    crossorigin="anonymous"></script>
   <style>
     .col-6 {
       margin-bottom: 1rem;
@@ -31,110 +28,13 @@
   </style>
   <script type="text/javascript">
 
-    var web3;
-
-    function getContractAbi() {
-      return JSON.parse('[{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"previousAdminRole","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"newAdminRole","type":"bytes32"}],"name":"RoleAdminChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleGranted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleRevoked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"DEFAULT_ADMIN_ROLE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"MINTER","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"_cardImages","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"cardImage","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"cardName","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"cardPhysical","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"}],"name":"getRoleAdmin","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"getRoleMember","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"}],"name":"getRoleMemberCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"grantRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"hasRole","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"wallet","type":"address"},{"internalType":"string","name":"cardName","type":"string"},{"internalType":"string","name":"cardImage","type":"string"},{"internalType":"bool","name":"cardPhysical","type":"bool"}],"name":"mint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"renounceRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"revokeRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"}]')
-    }
-
-    async function getDigidata(transaction) {
-
-      const tx = await web3.eth.getTransaction(transaction);
-
-      let tx_data = tx.input;
-      let input_data = '0x' + tx_data.slice(10);  // get only data without function selector
-
-      let params = web3.eth.abi.decodeParameters(['bytes32', 'string', 'string', 'bool'], input_data);
-
-      return {
-        name: params[1],
-        img: params[2],
-        isPhysical: params[3]
-      }
-    }
-
-    function fetchDibileList() {
-      web3 = new Web3("https://goerli.infura.io/v3/92014429957f49ce9358f23a559fd0d1")
-
-      // web3.eth.getBalance("0xEf1b253d04aeE934350D10C54fd14F4338590F24", (err, wei) => {
-      //   balance = web3.utils.fromWei(wei, 'ether');
-      //   console.log(balance);
-      // })
-      // decodeTx('0xda6ad8119e0f6da97f81b8a194ac94b79681a225a99c259970a4e5b09bf2e18d');
-
-
-      const CONTRACT_ABI = getContractAbi();
-      const contract = new web3.eth.Contract(CONTRACT_ABI, "0xd68A8ABEb9B7435A2652680A767c382DE857Ed6b");
-      var idToOwner = {};
-      var digibleList = [];
-
-      contract.getPastEvents("allEvents",
-        {
-          fromBlock: 0,
-          toBlock: 'latest' // You can also specify 'latest'          
-        })
-        .then(async (events) => {
-          //console.log(events.filter(event=> event.returnValues["0"] == "0x5e1320Aa48eB7C927A9386f6B194bF57de149645" || event.returnValues["0"] == "0x324c7fc6c5dd20f7ec67565aff682bdd4aef4993"));
-          // console.log(events.filter(event => event.returnValues.tokenId == 14));
-          //console.log(events.filter(event => event.returnValues.tokenId == 14)[0].transactionHash);
-
-          // web3.eth.getTransaction(events.filter(event => event.returnValues.tokenId == 14)[0].transactionHash, (err, tx) => {
-          //   let tx_data = tx.input;
-          //   let input_data = '0x' + tx_data.slice(10);  // get only data without function selector
-
-          //   let params = web3.eth.abi.decodeParameters(['bytes32', 'string', 'string', 'bool'], input_data);
-          //   console.log(params);
-
-          //   // console.log(web3.utils.toAscii(wei.input));
-          // })
-
-          const tokenids = events.map(event => event.returnValues.tokenId);
-
-          events.forEach(event => {
-            const digiData = digibleList.find(o => o.id == event.returnValues.tokenId);
-            if (digiData != undefined) {
-              digiData.owner = event.returnValues.to;
-              digiData.history.push(event);
-            } else {
-              const newData = {};
-              newData.id = event.returnValues.tokenId;
-              newData.owner = event.returnValues.to;
-              newData.history = [event];
-              digibleList.push(newData);
-            }
-          });
-
-          let count = 0;
-
-          for (let digiData of digibleList) {
-
-            if (count > 2) {
-              const data = await getDigidata(digiData.history[0].transactionHash);
-
-              if (data) {
-                digiData.name = data.name;
-                digiData.img = data.img;
-                digiData.isPhysical = data.isPhysical;
-              }
-            }
-
-            count++;
-          }
-
-          console.log(digibleList);
-
-          localStorage.setItem("events", JSON.stringify(digibleList));
-        })
-        .catch((err) => console.error(err));
-    }
-
     window.onload = async () => {
 
-      if(localStorage.getItem("events") == undefined){
-        fetchDibileList();
-      }
+      const reu = await fetch("https://cors-anywhere.herokuapp.com/https://digi.lokon.workers.dev/events");
+      const de = await reu.json();
+      console.log(de)
+      const datas = de
 
-      const datas = JSON.parse(localStorage.getItem("events"));
       for (let data of datas.slice(3)) {
 
         if(data.name == undefined || data.img == undefined){
@@ -152,41 +52,8 @@
 
           document.getElementById("row").append(div.children[0]);
       }
-
-      //WORKS GET USDC VALUE
-      // web3.eth.getTransactionReceipt("0xda6ad8119e0f6da97f81b8a194ac94b79681a225a99c259970a4e5b09bf2e18d", (err, wei) => {
-      //   console.log(parseInt(wei.logs[0].data, 16)) ;
-      // })
     }
 
-    // function decodeTx(hex) {
-    //   var tx = new ethereumjs.Tx(hex);
-    //   console.log('tx', tx)
-
-    //   var rawTx = {
-    //     nonce: parseInt(tx.nonce.toString('hex') || '0', 16),
-    //     gasPrice: parseInt(tx.gasPrice.toString('hex'), 16),
-    //     gasLimit: parseInt(tx.gasLimit.toString('hex'), 16),
-    //     to: '0x' + tx.to.toString('hex'),
-    //     value: parseInt(tx.value.toString('hex') || '0', 16),
-    //     data: tx.data.toString('hex'),
-    //   };
-
-    //   if (tx.r.length) {
-    //     rawTx = {
-    //       ...rawTx,
-
-    //       from: '0x' + tx.from.toString('hex'),
-    //       r: tx.r.toString('hex'),
-    //       v: tx.v.toString('hex'),
-    //       s: tx.s.toString('hex'),
-    //     }
-    //   }
-
-    //   console.log(rawTx);
-
-    //   return rawTx
-    // }
   </script>
 </head>
 
