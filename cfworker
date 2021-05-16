@@ -1,0 +1,121 @@
+const setCache = (key, data) => KRISTIAN_TODOS.put(key, data)
+const getCache = key => KRISTIAN_TODOS.get(key)
+const clearCache = key => KRISTIAN_TODOS.delete(key)
+
+addEventListener('fetch', function (event) {
+    const { request } = event
+    const response = handleRequest(request).catch(handleError)
+    event.respondWith(response)
+})
+
+addEventListener('scheduled', event => {
+    event.waitUntil(fetchEvents())
+})
+
+async function handleRequest(request) {
+    const { method, url } = request
+    const { host, pathname, searchParams } = new URL(url)
+    console.log(pathname)
+
+    switch (pathname) {
+        case '/events':
+            const events = await getEvents();
+            return asResponse(events)
+        case '/event':
+            const tokenId = searchParams.get('tokenId')
+            const event = await getEvent(tokenId);
+            return asResponse(event)
+        case '/owner':
+            const owner = searchParams.get('owner')
+            const owners = await findOwnersById(owner);
+            return asResponse(owners)
+        case '/favicon.ico':
+        case '/robots.txt':
+            return new Response(null, { status: 204 })
+    }
+
+    // Workers on these hostnames have no origin server,
+    // therefore there is nothing else to be found
+    if (host.endsWith('.workers.dev')
+        || host.endsWith('.cloudflareworkers.com')) {
+        return new Response('Not Found', { status: 404 })
+    }
+
+    // Makes a fetch request to the origin server
+    return fetch(request)
+}
+
+async function fetchEvents() {
+    try {
+
+        const events = await fetch("https://digi-domescobar.vercel.app/api/hello");
+        const eventData = await events.json();
+
+        await setCache("EVENTS", JSON.stringify(eventData))
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function fetchCollerctors(){
+    const events = await getEvents()
+}
+
+async function findOwnersById(ownerId) {
+    const events = await getEvents();
+    const res = events.filter(o => o.owner != null && o.owner.includes(ownerId));
+    return res;
+}
+
+async function getEvent(tokenId) {
+    const events = await getEvents();
+    const event = events.filter(o => o.id == tokenId);
+    return event;
+}
+
+async function getEvents() {
+    let data
+    try {
+        const cache = await getCache("EVENTS")
+        if (!cache) {
+
+            const events = await fetch("https://digi-domescobar.vercel.app/api/hello");
+            const eventData = await events.json();
+
+            await setCache("EVENTS", JSON.stringify(eventData))
+            data = events
+        } else {
+            data = JSON.parse(cache)
+        }
+    } catch (err) {
+        await clearCache("EVENTS")
+        return new Response(err, { status: 500 })
+    }
+
+    return data;
+}
+
+function asResponse(body) {
+    return new Response(JSON.stringify(body), {
+        headers: { 'Content-Type': 'application/json' },
+    })
+}
+
+
+/**
+ * Responds with an uncaught error.
+ * @param {Error} error
+ * @returns {Response}
+ */
+function handleError(error) {
+    console.error('Uncaught error:', error)
+
+    const { stack } = error
+    return new Response(stack || error, {
+        status: 500,
+        headers: {
+            'Content-Type': 'text/plain;charset=UTF-8'
+        }
+    })
+}

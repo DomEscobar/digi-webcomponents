@@ -8,51 +8,35 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import './shiny-text.js';
+import './lazy-img.js';
 let DigiCard = class DigiCard extends LitElement {
-    constructor() {
-        super(...arguments);
-        this.emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAmCAIAAADMaMX6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAzSURBVFhH7c1BEQAwEAOh+lcZKTXB3GsxwNutPqvP6rP6rD6rz+qz+qw+q8/qs/qs22/7cqJrk6NNXs8AAAAASUVORK5CYII=';
-        // @property({ type: Array })
-        // attacks: string[] = [];
-        this.loadedImg = this.emptyImg;
-    }
-    connectedCallback() {
-        super.connectedCallback();
-        this.checkImage(this.image || this.emptyImg).then(() => {
-            this.loadedImg = this.image || this.emptyImg;
-            this.requestUpdate();
-        });
-    }
-    async checkImage(url) {
-        const img = new Image();
-        return new Promise(resolve => {
-            img.onload = () => resolve(img);
-            img.src = url;
-        });
-    }
+    // @property({ type: Array })
+    // attacks: string[] = [];
     render() {
         return html `
         ${this.name ?
-            html `<div class="card-name"> <text-shiny bgTitle="${this.bgTitle}" text="${this.name}"></text-shiny></div>` : undefined}  
-      <div class="card-body">
-
-       <img src="${this.loadedImg}" class="card-bg" />
-
-      <div class="image-container">
-        <img src="${this.loadedImg}" class="card-img-top">
-      </div>
-
-      <div class="info-container">
-
-        ${this.power ?
-            html `<div class="text-power">  ${this.power} </div>` : undefined}  
-
-        ${this.price ?
-            html `<div class="text-row"> ${unsafeHTML(icons.dollar)} <span class="info-text">${this.price}</span></div>` : undefined}  
-
-
+            html `<div class="card-name">
+          <text-shiny bgTitle="${this.bgTitle}" text="${this.name}"></text-shiny>
+        </div>` : undefined}
+        <div class="card-body">
+        
+          <img src="${this.image}" class="card-bg" />
+        
+          <div class="image-container">
+            <img-lazy src="${this.image}" class="card-img-top"></img-lazy>
+          </div>
+        
+          <div class="info-container">
+        
+            ${this.power ?
+            html `<div class="text-power"> ${this.power} </div>` : undefined}
+        
+            ${this.price ?
+            html `<div class="text-row"> ${unsafeHTML(icons.dollar)} <span class="info-text">${this.price}</span></div>` :
+            undefined}
+        
+          </div>
         </div>
-      </div>
     `;
     }
 };
